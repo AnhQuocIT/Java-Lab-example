@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 7, 2019 10:09:46 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="entities.Phongban" table="phongban" catalog="employee" optimistic-lock="version">
+        <id name="maPhongBan" type="string">
+            <column name="MaPhongBan" length="5" />
+            <generator class="assigned" />
+        </id>
+        <property name="tenPhongBan" type="string">
+            <column name="TenPhongBan" length="40" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>
