@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Jan 7, 2019 10:09:46 AM by Hibernate Tools 4.3.1 -->
+<!-- Generated Jan 8, 2019 5:35:09 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="entities.Chucvu" table="chucvu" catalog="employee" optimistic-lock="version">
         <id name="maChucVu" type="string">
@@ -14,5 +14,11 @@
         <property name="maPhongBan" type="string">
             <column name="MaPhongBan" length="5" not-null="true" />
         </property>
+        <set name="nhanviens" table="nhanvien" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ChucVu" length="5" not-null="true" />
+            </key>
+            <one-to-many class="entities.Nhanvien" />
+        </set>
     </class>
 </hibernate-mapping>

@@ -45,10 +45,22 @@ public class NhanvienDAL {
         }
     }
     
-    public boolean saveOrUpdate (Nhanvien nv){
+    public boolean addNew (Nhanvien nv){
         try {
             factory.getCurrentSession().beginTransaction();
-            factory.getCurrentSession().saveOrUpdate(nv);
+            factory.getCurrentSession().save(nv);
+            factory.getCurrentSession().getTransaction().commit();
+            return true;
+        } catch (Exception e) {
+            factory.getCurrentSession().getTransaction().rollback();
+            return false;
+        }
+    }
+    
+    public boolean update (Nhanvien nv){
+        try {
+            factory.getCurrentSession().beginTransaction();
+            factory.getCurrentSession().update(nv);
             factory.getCurrentSession().getTransaction().commit();
             return true;
         } catch (Exception e) {

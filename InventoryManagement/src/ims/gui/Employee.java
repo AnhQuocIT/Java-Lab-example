@@ -5,22 +5,51 @@
  */
 package ims.gui;
 
+import ims.bll.*;
+
+import entities.*;
 import java.awt.Dimension;
+import java.util.*;
 import java.awt.Toolkit;
+import java.awt.event.ActionListener;
+import java.lang.reflect.Field;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author NAT
  */
 public class Employee extends javax.swing.JFrame {
-
+    
+    private Nhanvien nhanvien;
+    private List<Nhanvien> nhanvienList;
+    private List<Bangcap> bangcaps;
+    private List<Chucvu> chucvus;
+    private List<Congviec> congviecs;
+    private List<Tinhthanh> tinhthanhs;
+    private List<Loainhanvien> loainhanviens;
+    private List<Phongban> phongbans;
+    private List<Hocvan> hocvans;
+    private List<Ngoaingu> ngoaingus;
+    private List<Dantoc> dantocs;
+    private List<Quoctich> quoctichs;
+    private List<Tinhoc> tinhocs;
+    private List<Tongiao> tongiaos;
     /**
      * Creates new form Employee
      */
     public Employee() {
         initComponents();
         stateButton(true);
-         setInfoDialog();
+        setInfoDialog();
     }
     public  void setInfoDialog() {
         Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
@@ -31,14 +60,127 @@ public class Employee extends javax.swing.JFrame {
     }
     public void stateButton(boolean value){
         
-        btNew.setVisible(value);
-        btEdit.setVisible(value);
-        btDelete.setVisible(value);
-        btPrint.setVisible(value);
-        btClose.setVisible(value);
-        btSave.setVisible(!value);
-        btCancel.setVisible(!value);
+        btNew.setVisible(!value);
+        btEdit.setVisible(!value);
+        btDelete.setVisible(!value);
+        btPrint.setVisible(!value);
+        btClose.setVisible(!value);
+        btSave.setVisible(value);
+        btCancel.setVisible(value);
         
+    }
+    
+    public void setNhanvien(Nhanvien nhanvien){
+        this.nhanvien = nhanvien;
+        txtMaso.setText(nhanvien.getMaNhanVien());
+        txtHoten.setText(nhanvien.getHoTen());
+        txtBidanh.setText(nhanvien.getBiDanh());
+        if(nhanvien.getGioiTinh() == true){
+            cbNu.setSelected(true);
+        }
+        if(nhanvien.getHonNhan() == true){
+            cbGiadinh.setSelected(true);
+        }
+        txtDidong.setText(nhanvien.getDiDong());
+        txtDTNha.setText(nhanvien.getDienThoaiNha());
+        txtEmail.setText(nhanvien.getEmail());
+        txtNgaySinh.setText(String.valueOf(nhanvien.getNgaySinh()));
+        txtNoiSinh.setText(nhanvien.getNoiSinh());
+        cbbTinh.setSelectedItem(nhanvien.getTinhthanh());
+        txtCMND.setText(nhanvien.getCmnd());
+        txtNgaycapCMND.setText(String.valueOf(nhanvien.getNgayCap()));
+        txtNoiCap.setText(nhanvien.getNoiCap());
+        txtQuequan.setText(nhanvien.getQueQuan());
+        txtDiaChi.setText(nhanvien.getDiaChi());
+        txtTamtru.setText(nhanvien.getTamTru());
+        
+        cbbLoaiNV.setSelectedItem(nhanvien.getLoainhanvien());
+        txtNgayVaoLam.setText(String.valueOf(nhanvien.getNgayVaoLam()));
+        cbbCongviec.setSelectedItem(nhanvien.getCongviec());
+        cbbPhongBan.setSelectedItem(nhanvien.getPhongban());
+        cbbChucvu.setSelectedItem(nhanvien.getChucvu());
+        txtLuongCB.setText(String.valueOf(nhanvien.getMucLuongCb()));
+        txtHeSo.setText(String.valueOf(nhanvien.getHeSoLuong()));
+        txtLuong.setText(String.valueOf(nhanvien.getMucLuong()));
+        txtPhucap.setText(String.valueOf(nhanvien.getPhuCapLuong()));
+        txtSoLD.setText(nhanvien.getSoLaoDong());
+        txtNgayCapLD.setText(String.valueOf(nhanvien.getNgayCapLd()));
+        txtNoiCapLD.setText(nhanvien.getNoiCapLd());
+        txtTKNH.setText(nhanvien.getTknganHang());
+        txtNganHang.setText(nhanvien.getNganHang());
+        cbbHocvan.setSelectedItem(nhanvien.getHocvan());
+        cbbBangCap.setSelectedItem(nhanvien.getBangcap());
+        cbbNgoaiNgu.setSelectedItem(nhanvien.getNgoaingu());
+        
+        cbbTinhoc.setSelectedItem(nhanvien.getTinhoc());
+        
+        cbbDantoc.setSelectedItem(nhanvien.getDantoc());
+        cbbQuoctich.setSelectedItem(nhanvien.getQuoctich());
+        cbbTongiao.setSelectedItem(nhanvien.getTongiao());
+    }
+    
+    public Nhanvien getNhanvien(){
+        return nhanvien;
+    }
+    
+    public void setListBangcap(List<Bangcap> bangcaps){
+        this.bangcaps = bangcaps;
+        loadComboBox(cbbBangCap, bangcaps);
+    }
+    
+    public void setListChucvu (List<Chucvu> chucvus){
+        this.chucvus = chucvus;
+        loadComboBox(cbbChucvu, chucvus);
+    }
+    
+    public void setListCongviec (List<Congviec> congviecs){
+        this.congviecs = congviecs;
+        loadComboBox(cbbCongviec, congviecs);
+    }
+    
+    public void setListDantoc (List<Dantoc> dantocs){
+        this.dantocs = dantocs;
+        loadComboBox(cbbDantoc, dantocs);
+    }
+    
+    public void setListHocvan (List<Hocvan> hocvans){
+        this.hocvans = hocvans;
+        loadComboBox(cbbHocvan, hocvans);
+    }
+    
+    public void setListLoaiNV (List<Loainhanvien> loainhanviens){
+        this.loainhanviens = loainhanviens;
+        loadComboBox(cbbLoaiNV, loainhanviens);
+    }
+    
+    public void setListNgoaingu (List<Ngoaingu> ngoaingus){
+        this.ngoaingus = ngoaingus;
+        loadComboBox(cbbNgoaiNgu, ngoaingus);
+    }
+    
+    public void setListPhongban (List<Phongban> phongbans){
+        this.phongbans = phongbans;
+        loadComboBox(cbbPhongBan, phongbans);
+    }
+    
+    public void setListQuoctich(List<Quoctich> quoctichs){
+        this.quoctichs = quoctichs;
+        loadComboBox(cbbQuoctich, quoctichs);
+    }
+    
+    public void setListTinhoc (List<Tinhoc> tinhocs){
+        this.tinhocs = tinhocs;
+        loadComboBox(cbbTinhoc, tinhocs);
+    }
+    
+    public void setListTinhthanh(List<Tinhthanh> tinhthanhs){
+        this.tinhthanhs = tinhthanhs;
+        loadComboBox(cbbTinh, tinhthanhs);
+    }
+    
+    public void setListTongiao(List<Tongiao> tongiaos){
+        this.tongiaos = tongiaos;
+        loadComboBox(cbbTongiao, tongiaos);
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -84,7 +226,7 @@ public class Employee extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         txtCMND = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtNgaycapCMND = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
         txtNoiCap = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
@@ -146,6 +288,11 @@ public class Employee extends javax.swing.JFrame {
         cbbTongiao = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         btNew.setText("Thêm");
         btNew.setPreferredSize(new java.awt.Dimension(75, 23));
@@ -171,6 +318,11 @@ public class Employee extends javax.swing.JFrame {
 
         btClose.setText("Thoát");
         btClose.setPreferredSize(new java.awt.Dimension(75, 23));
+        btClose.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btCloseActionPerformed(evt);
+            }
+        });
 
         btSave.setText("Ghi");
         btSave.setPreferredSize(new java.awt.Dimension(75, 23));
@@ -228,8 +380,6 @@ public class Employee extends javax.swing.JFrame {
 
         jLabel11.setText("Tỉnh thành");
 
-        cbbTinh.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         jLabel12.setText("CMND");
 
         jLabel13.setText("Ngày cấp");
@@ -261,18 +411,6 @@ public class Employee extends javax.swing.JFrame {
 
         jLabel26.setText("Dân tộc");
 
-        cbbLoaiNV.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        txtLuongCB.setPreferredSize(new java.awt.Dimension(56, 20));
-
-        cbbCongviec.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        cbbHocvan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        cbbNgoaiNgu.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        cbbDantoc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         jLabel27.setText("Ngày vào làm");
 
         jLabel28.setForeground(new java.awt.Color(255, 0, 0));
@@ -296,21 +434,15 @@ public class Employee extends javax.swing.JFrame {
 
         jLabel35.setText("Quốc tịch");
 
-        cbbQuoctich.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         jLabel36.setText("Phòng ban");
 
         jLabel37.setForeground(new java.awt.Color(255, 0, 0));
         jLabel37.setText("(*)");
 
-        cbbPhongBan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         jLabel38.setText("Chức vụ");
 
         jLabel39.setForeground(new java.awt.Color(255, 0, 0));
         jLabel39.setText("(*)");
-
-        cbbChucvu.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel40.setText("Mức lương");
 
@@ -322,15 +454,9 @@ public class Employee extends javax.swing.JFrame {
 
         jLabel44.setText("Bằng cấp");
 
-        cbbBangCap.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         jLabel45.setText("Tin học");
 
-        cbbTinhoc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         jLabel46.setText("Tôn giáo");
-
-        cbbTongiao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout employeePanelLayout = new javax.swing.GroupLayout(employeePanel);
         employeePanel.setLayout(employeePanelLayout);
@@ -469,7 +595,7 @@ public class Employee extends javax.swing.JFrame {
                                     .addComponent(txtHoten)
                                     .addComponent(txtDTNha)
                                     .addComponent(txtNoiSinh)
-                                    .addComponent(jTextField1))
+                                    .addComponent(txtNgaycapCMND))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(employeePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel11)
@@ -512,10 +638,10 @@ public class Employee extends javax.swing.JFrame {
                         .addComponent(jLabel6))
                     .addGroup(employeePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txtBidanh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(cbGiadinh)
                         .addComponent(jLabel3)
                         .addComponent(txtHoten, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(cbNu)))
+                        .addComponent(cbNu)
+                        .addComponent(cbGiadinh)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 11, Short.MAX_VALUE)
                 .addGroup(employeePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(employeePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -535,14 +661,14 @@ public class Employee extends javax.swing.JFrame {
                         .addComponent(jLabel10))
                     .addGroup(employeePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txtNoiSinh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(cbbTinh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel11))
+                        .addComponent(cbbTinh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel11)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(employeePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(employeePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txtCMND, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel13))
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNgaycapCMND, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(employeePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txtNoiCap)
                         .addComponent(jLabel14))
@@ -583,17 +709,18 @@ public class Employee extends javax.swing.JFrame {
                     .addComponent(jLabel39)
                     .addComponent(cbbChucvu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(employeePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel21)
-                    .addComponent(txtLuongCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel30)
-                    .addComponent(jLabel32)
-                    .addComponent(jLabel33)
-                    .addComponent(txtHeSo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel40)
-                    .addComponent(txtLuong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel41)
-                    .addComponent(txtPhucap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(employeePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtLuongCB, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(employeePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel21)
+                        .addComponent(jLabel30)
+                        .addComponent(jLabel32)
+                        .addComponent(jLabel33)
+                        .addComponent(txtHeSo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel40)
+                        .addComponent(txtLuong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel41)
+                        .addComponent(txtPhucap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(employeePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel22)
@@ -672,26 +799,222 @@ public class Employee extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    protected boolean validateInput(){
+        String maNV = txtMaso.getText();
+        String hoTen = txtHoten.getText();
+        String biDanh = txtBidanh.getText();
+        Boolean gtNu = false;
+        if(cbNu.isSelected()){
+            gtNu = true;
+        }
+        Boolean honNhan = false;
+        if(cbGiadinh.isSelected()){
+            honNhan = true;
+        }
+        String diDong = txtDidong.getText();
+        String dtNha = txtDTNha.getText();
+        String email = txtEmail.getText();
+        String ngaySinh = txtNgaySinh.getText();
+        String noiSinh = txtNoiSinh.getText();
+        Tinhthanh tinhThanh = (Tinhthanh) cbbTinh.getSelectedItem();
+        String maTinhThanh = tinhThanh.getMaTinhThanh();
+        String CMND = txtCMND.getText();
+        String ngayCapCMND = txtNgaycapCMND.getText();
+        String noiCapCMND = txtNoiCap.getText();
+        String queQuan = txtQuequan.getText();
+        String diaChi = txtDiaChi.getText();
+        String tamTru = txtTamtru.getText();
+        Loainhanvien loaiNV = (Loainhanvien) cbbLoaiNV.getSelectedItem();
+        String maLoaiNV = loaiNV.getMaLoaiNv();
+        String ngayVaoLam = txtNgayVaoLam.getText();
+        Phongban phongBan = (Phongban) cbbPhongBan.getSelectedItem();
+        String maPhongBan = phongBan.getMaPhongBan();
+        Congviec congViec = (Congviec) cbbCongviec.getSelectedItem();
+        String maCongviec = congViec.getMaCongViec();
+        Chucvu chucVu = (Chucvu) cbbChucvu.getSelectedItem();
+        String maChucVu = chucVu.getMaChucVu();
+        String luongCB = txtLuongCB.getText();
+        String heSo = txtHeSo.getText();
+        String luong = txtLuong.getText();
+        String phuCap = txtPhucap.getText();
+        String soLD = txtSoLD.getText();
+        String ngayCapLD = txtNgayCapLD.getText();
+        String noiCapLD = txtNoiCapLD.getText();
+        String tkNganHang = txtTKNH.getText();
+        String nganHang = txtNganHang.getText();
+        Hocvan hocVan = (Hocvan) cbbHocvan.getSelectedItem();
+        String maHocVan = hocVan.getMaHocVan();
+        Bangcap bangCap = (Bangcap) cbbBangCap.getSelectedItem();
+        String maBangCap = bangCap.getMaBangCap();
+        Ngoaingu ngoaiNgu = (Ngoaingu) cbbNgoaiNgu.getSelectedItem();
+        String maNgoaiNgu = ngoaiNgu.getMaNgoaiNgu();
+        Tinhoc tinHoc = (Tinhoc) cbbTinhoc.getSelectedItem();
+        String maTinHoc = tinHoc.getMaTinHoc();
+        Dantoc danToc = (Dantoc) cbbDantoc.getSelectedItem();
+        String maDanToc = danToc.getMaDanToc();
+        Quoctich quocTich = (Quoctich) cbbQuoctich.getSelectedItem();
+        String maQuocTich = quocTich.getMaQuocTich();
+        Tongiao tonGiao = (Tongiao) cbbTongiao.getSelectedItem();
+        String maTonGiao = tonGiao.getMaTonGiao();
+        Date NS = null;
+        Date NCCMND = null;
+        Date NVL = null;
+        Date NCLD = null;
+        long LCB = Long.parseLong(luongCB);
+        float HS = Float.parseFloat(heSo);
+        long Lg = (long) (LCB * HS);
+        long PC = Long.parseLong(phuCap);
+        
+        if (maNV.equals("")) {
+            JOptionPane.showMessageDialog(this, "Nhập mã nhân viên!");
+            txtMaso.requestFocus();
+            return false;
+        } else if (hoTen.equals("")) {
+            JOptionPane.showMessageDialog(this, "Nhập tên nhân viên!");
+            txtHoten.requestFocus();
+            return false;			
+
+        } else if (loaiNV == null) {
+            JOptionPane.showMessageDialog(this, "Loại nhân viên không được bỏ trống!");
+            return false;
+        } else if (ngayVaoLam.equals("")){
+            JOptionPane.showMessageDialog(this, "Nhập ngày vào làm!");
+            txtNgayVaoLam.requestFocus();
+            return false;
+        } else if (phongBan == null){
+            JOptionPane.showMessageDialog(this, "Phòng ban không được bỏ trống!");
+            return false;
+        } else if (congViec == null){
+            JOptionPane.showMessageDialog(this, "Công việc không được bỏ trống!");
+            return false;
+        } else if (chucVu == null){
+            JOptionPane.showMessageDialog(this, "Chức vụ không được bỏ trống!");
+            return false;
+        } else if (luongCB.equals("")){
+            JOptionPane.showMessageDialog(this, "Nhập mức lương cơ bản!");
+            txtLuongCB.requestFocus();
+            return false;
+        } else if (heSo.equals("")){
+            JOptionPane.showMessageDialog(this, "Nhập hệ số lương!");
+            txtHeSo.requestFocus();
+            return false;
+        }
+        try {
+            NS = new SimpleDateFormat("yyyy-mm-dd").parse(ngaySinh);
+        } catch (ParseException ex) {
+            JOptionPane.showMessageDialog(this, "Chưa đúng định dạng ngày (yyyy-MM-dd)!");
+            txtNgaySinh.requestFocus();
+            return false;
+        }
+        try {
+            NCCMND = new SimpleDateFormat("yyyy-mm-dd").parse(ngayCapCMND);
+        } catch (ParseException ex) {
+            JOptionPane.showMessageDialog(this, "Chưa đúng định dạng ngày (yyyy-MM-dd)!");
+            txtNgaycapCMND.requestFocus();
+            return false;
+        }
+        try {
+            NVL = new SimpleDateFormat("yyyy-mm-dd").parse(ngayVaoLam);
+        } catch (ParseException ex) {
+            JOptionPane.showMessageDialog(this, "Chưa đúng định dạng ngày (yyyy-MM-dd)!");
+            txtNgayVaoLam.requestFocus();
+            return false;
+        }
+        try {
+            NCLD = new SimpleDateFormat("yyyy-mm-dd").parse(ngayCapLD);
+        } catch (ParseException ex) {
+            JOptionPane.showMessageDialog(this, "Chưa đúng định dạng ngày (yyyy-MM-dd)!");
+            txtNgayCapLD.requestFocus();
+            return false;
+        }			
+        
+
+        if (nhanvien == null) {		
+                nhanvien = new Nhanvien();
+        }
+        
+        nhanvien.setHoTen(hoTen);
+        nhanvien.setBiDanh(biDanh);
+        nhanvien.setGioiTinh(gtNu);
+        nhanvien.setHonNhan(honNhan);
+        nhanvien.setDiDong(diDong);
+        nhanvien.setDienThoaiNha(dtNha);
+        nhanvien.setEmail(email);
+        nhanvien.setNgaySinh(NS);
+        nhanvien.setNoiSinh(noiSinh);
+        nhanvien.setTinhthanh(tinhThanh);
+        nhanvien.setCmnd(CMND);
+        nhanvien.setNgayCap(NCCMND);
+        nhanvien.setNoiCap(noiCapCMND);
+        nhanvien.setQueQuan(queQuan);
+        nhanvien.setDiaChi(diaChi);
+        nhanvien.setTamTru(tamTru);
+        nhanvien.setLoainhanvien(loaiNV);
+        nhanvien.setNgayVaoLam(NVL);
+        nhanvien.setPhongban(phongBan);
+        nhanvien.setCongviec(congViec);
+        nhanvien.setChucvu(chucVu);
+        nhanvien.setMucLuongCb(LCB);
+        nhanvien.setMucLuong(Lg);
+        nhanvien.setHeSoLuong(HS);
+        nhanvien.setPhuCapLuong(PC);
+        nhanvien.setSoLaoDong(soLD);
+        nhanvien.setNgayCapLd(NCLD);
+        nhanvien.setNoiCapLd(noiCapLD);
+        nhanvien.setTknganHang(tkNganHang);
+        nhanvien.setNganHang(nganHang);
+        nhanvien.setHocvan(hocVan);
+        nhanvien.setBangcap(bangCap);
+        nhanvien.setNgoaingu(ngoaiNgu);
+        nhanvien.setTinhoc(tinHoc);
+        nhanvien.setDantoc(danToc);
+        nhanvien.setQuoctich(quocTich);
+        nhanvien.setTongiao(tonGiao);
+        return true;    
+    }
     private void btNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNewActionPerformed
-        stateButton(false);
+        stateButton(true);
     }//GEN-LAST:event_btNewActionPerformed
 
     private void btSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSaveActionPerformed
-        stateButton(true);
+        stateButton(false);
+        if(validateInput()){
+            this.dispose();
+        }
     }//GEN-LAST:event_btSaveActionPerformed
 
     private void btEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEditActionPerformed
-        stateButton(false);
+        stateButton(true);
     }//GEN-LAST:event_btEditActionPerformed
 
     private void btCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelActionPerformed
-         stateButton(true);// TODO add your handling code here:
+         stateButton(false);// TODO add your handling code here:
+         this.dispose();
     }//GEN-LAST:event_btCancelActionPerformed
 
     private void cbGiadinhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbGiadinhActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbGiadinhActionPerformed
 
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formWindowOpened
+
+    private void btCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCloseActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_btCloseActionPerformed
+
+    public void loadComboBox(JComboBox comboBox, List<?> listData){
+        Vector items = new Vector();
+        for(int i = 0; i< listData.size(); i++){
+            Object object = listData.get(i);
+            items.addElement(object);
+        }
+        DefaultComboBoxModel model = new DefaultComboBoxModel(items);
+        comboBox.setModel(model);
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -798,7 +1121,6 @@ public class Employee extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lblTitle1;
     private javax.swing.JTextField txtBidanh;
     private javax.swing.JTextField txtCMND;
@@ -815,6 +1137,7 @@ public class Employee extends javax.swing.JFrame {
     private javax.swing.JTextField txtNgayCapLD;
     private javax.swing.JTextField txtNgaySinh;
     private javax.swing.JTextField txtNgayVaoLam;
+    private javax.swing.JTextField txtNgaycapCMND;
     private javax.swing.JTextField txtNoiCap;
     private javax.swing.JTextField txtNoiCapLD;
     private javax.swing.JTextField txtNoiSinh;

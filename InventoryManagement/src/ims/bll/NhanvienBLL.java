@@ -18,4 +18,16 @@ public class NhanvienBLL {
     public List<Nhanvien> getListNhanvien (){
         return nhanvienDAL.getListNV();
     }
+    
+    public Boolean addNewNhanvien(Nhanvien nhanvien){
+        return nhanvienDAL.addNew(nhanvien);
+    }
+    
+    public Boolean updateNhanvien (Nhanvien nhanvien){
+        return nhanvienDAL.update(nhanvien);
+    }
+    
+    public Boolean deleteNhanvien (Nhanvien nhanvien){
+        return nhanvienDAL.deleteOneNV(nhanvien);
+    }
 }

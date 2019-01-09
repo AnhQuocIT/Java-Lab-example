@@ -47,18 +47,18 @@ Contributor(s):
     <property name="hibernate.connection.username">root</property>
     <property name="hibernate.show_sql">true</property>
     <property name="hibernate.current_session_context_class">thread</property>
-    <mapping resource="entities/Tongiao.hbm.xml"/>
-    <mapping resource="entities/Tinhoc.hbm.xml"/>
-    <mapping resource="entities/Chucvu.hbm.xml"/>
-    <mapping resource="entities/Quoctich.hbm.xml"/>
-    <mapping resource="entities/Ngoaingu.hbm.xml"/>
-    <mapping resource="entities/Congviec.hbm.xml"/>
-    <mapping resource="entities/Tinhthanh.hbm.xml"/>
-    <mapping resource="entities/Phongban.hbm.xml"/>
-    <mapping resource="entities/Bangcap.hbm.xml"/>
-    <mapping resource="entities/Dantoc.hbm.xml"/>
-    <mapping resource="entities/Loainhanvien.hbm.xml"/>
-    <mapping resource="entities/Hocvan.hbm.xml"/>
     <mapping resource="entities/Nhanvien.hbm.xml"/>
+    <mapping resource="entities/Congviec.hbm.xml"/>
+    <mapping resource="entities/Tinhoc.hbm.xml"/>
+    <mapping resource="entities/Bangcap.hbm.xml"/>
+    <mapping resource="entities/Quoctich.hbm.xml"/>
+    <mapping resource="entities/Tongiao.hbm.xml"/>
+    <mapping resource="entities/Hocvan.hbm.xml"/>
+    <mapping resource="entities/Chucvu.hbm.xml"/>
+    <mapping resource="entities/Tinhthanh.hbm.xml"/>
+    <mapping resource="entities/Ngoaingu.hbm.xml"/>
+    <mapping resource="entities/Loainhanvien.hbm.xml"/>
+    <mapping resource="entities/Phongban.hbm.xml"/>
+    <mapping resource="entities/Dantoc.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>
