@@ -51,7 +51,12 @@ public class Bangcap  implements java.io.Serializable {
         this.nhanviens = nhanviens;
     }
 
+    @Override
+    public String toString() {
+        return tenBangCap; //To change body of generated methods, choose Tools | Templates.
+    }
 
+    
 
 
 }

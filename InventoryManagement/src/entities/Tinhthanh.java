@@ -51,7 +51,10 @@ public class Tinhthanh  implements java.io.Serializable {
         this.nhanviens = nhanviens;
     }
 
-
+    @Override
+    public String toString() {
+        return tenTinhThanh; //To change body of generated methods, choose Tools | Templates.
+    }
 
 
 }

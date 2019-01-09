@@ -51,7 +51,10 @@ public class Tinhoc  implements java.io.Serializable {
         this.nhanviens = nhanviens;
     }
 
-
+    @Override
+    public String toString() {
+        return tenTinHoc; //To change body of generated methods, choose Tools | Templates.
+    }
 
 
 }

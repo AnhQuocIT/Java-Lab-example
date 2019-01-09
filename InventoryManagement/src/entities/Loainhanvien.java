@@ -51,7 +51,10 @@ public class Loainhanvien  implements java.io.Serializable {
         this.nhanviens = nhanviens;
     }
 
-
+    @Override
+    public String toString() {
+        return tenLoaiNv; //To change body of generated methods, choose Tools | Templates.
+    }
 
 
 }

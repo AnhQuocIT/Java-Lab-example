@@ -51,7 +51,10 @@ public class Chucvu  implements java.io.Serializable {
         this.nhanviens = nhanviens;
     }
 
-
+    @Override
+    public String toString() {
+        return tenChucVu; //To change body of generated methods, choose Tools | Templates.
+    }
 
 
 }

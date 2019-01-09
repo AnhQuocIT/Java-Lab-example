@@ -51,7 +51,10 @@ public class Dantoc  implements java.io.Serializable {
         this.nhanviens = nhanviens;
     }
 
-
+    @Override
+    public String toString() {
+        return tenDanToc; //To change body of generated methods, choose Tools | Templates.
+    }
 
 
 }

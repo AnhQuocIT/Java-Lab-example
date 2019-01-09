@@ -51,7 +51,10 @@ public class Hocvan  implements java.io.Serializable {
         this.nhanviens = nhanviens;
     }
 
-
+    @Override
+    public String toString() {
+        return tenHocVan; //To change body of generated methods, choose Tools | Templates.
+    }
 
 
 }

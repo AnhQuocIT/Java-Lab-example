@@ -51,7 +51,10 @@ public class Quoctich  implements java.io.Serializable {
         this.nhanviens = nhanviens;
     }
 
-
+    @Override
+    public String toString() {
+        return tenQuocTich; //To change body of generated methods, choose Tools | Templates.
+    }
 
 
 }

@@ -51,7 +51,10 @@ public class Phongban  implements java.io.Serializable {
         this.nhanviens = nhanviens;
     }
 
-
+    @Override
+    public String toString() {
+        return tenPhongBan; //To change body of generated methods, choose Tools | Templates.
+    }
 
 
 }
