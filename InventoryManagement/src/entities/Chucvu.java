@@ -1,5 +1,5 @@
 package entities;
-// Generated Jan 8, 2019 5:35:08 PM by Hibernate Tools 4.3.1
+// Generated Jan 9, 2019 4:59:26 PM by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -13,22 +13,19 @@ public class Chucvu  implements java.io.Serializable {
 
      private String maChucVu;
      private String tenChucVu;
-     private String maPhongBan;
      private Set nhanviens = new HashSet(0);
 
     public Chucvu() {
     }
 
 	
-    public Chucvu(String maChucVu, String tenChucVu, String maPhongBan) {
+    public Chucvu(String maChucVu, String tenChucVu) {
         this.maChucVu = maChucVu;
         this.tenChucVu = tenChucVu;
-        this.maPhongBan = maPhongBan;
     }
-    public Chucvu(String maChucVu, String tenChucVu, String maPhongBan, Set nhanviens) {
+    public Chucvu(String maChucVu, String tenChucVu, Set nhanviens) {
        this.maChucVu = maChucVu;
        this.tenChucVu = tenChucVu;
-       this.maPhongBan = maPhongBan;
        this.nhanviens = nhanviens;
     }
    
@@ -45,13 +42,6 @@ public class Chucvu  implements java.io.Serializable {
     
     public void setTenChucVu(String tenChucVu) {
         this.tenChucVu = tenChucVu;
-    }
-    public String getMaPhongBan() {
-        return this.maPhongBan;
-    }
-    
-    public void setMaPhongBan(String maPhongBan) {
-        this.maPhongBan = maPhongBan;
     }
     public Set getNhanviens() {
         return this.nhanviens;
