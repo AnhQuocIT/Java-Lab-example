@@ -208,6 +208,7 @@ public class EmployeeList extends javax.swing.JFrame {
         emGui.setListTinhoc(tinhocs);
         emGui.setListTinhthanh(tinhthanhs);
         emGui.setListTongiao(tongiaos);
+        emGui.setEditableId(true);
         emGui.setVisible(true);
         
         Nhanvien newNhanvien = emGui.getNhanvien();
@@ -256,6 +257,7 @@ public class EmployeeList extends javax.swing.JFrame {
             emGui.setListTinhthanh(tinhthanhs);
             emGui.setListTongiao(tongiaos);
             emGui.setNhanvien(nhanvienToEdit);
+            emGui.setEditableId(false);
             emGui.setVisible(true);
         }
         

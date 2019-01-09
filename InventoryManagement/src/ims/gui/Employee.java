@@ -70,6 +70,10 @@ public class Employee extends javax.swing.JFrame {
         
     }
     
+    public void setEditableId(boolean value){
+        txtMaso.setEditable(value);
+    }
+    
     public void setNhanvien(Nhanvien nhanvien){
         this.nhanvien = nhanvien;
         txtMaso.setText(nhanvien.getMaNhanVien());

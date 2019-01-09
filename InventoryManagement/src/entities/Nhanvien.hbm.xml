@@ -1,0 +1,123 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 8, 2019 5:35:09 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="entities.Nhanvien" table="nhanvien" catalog="employee" optimistic-lock="version">
+        <id name="maNhanVien" type="string">
+            <column name="MaNhanVien" length="6" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="bangcap" class="entities.Bangcap" fetch="select">
+            <column name="BangCap" length="5" not-null="true" />
+        </many-to-one>
+        <many-to-one name="chucvu" class="entities.Chucvu" fetch="select">
+            <column name="ChucVu" length="5" not-null="true" />
+        </many-to-one>
+        <many-to-one name="congviec" class="entities.Congviec" fetch="select">
+            <column name="CongViec" length="5" not-null="true" />
+        </many-to-one>
+        <many-to-one name="dantoc" class="entities.Dantoc" fetch="select">
+            <column name="DanToc" length="5" not-null="true" />
+        </many-to-one>
+        <many-to-one name="hocvan" class="entities.Hocvan" fetch="select">
+            <column name="HocVan" length="5" not-null="true" />
+        </many-to-one>
+        <many-to-one name="loainhanvien" class="entities.Loainhanvien" fetch="select">
+            <column name="LoaiNhanVien" length="4" not-null="true" />
+        </many-to-one>
+        <many-to-one name="ngoaingu" class="entities.Ngoaingu" fetch="select">
+            <column name="NgoaiNgu" length="5" not-null="true" />
+        </many-to-one>
+        <many-to-one name="phongban" class="entities.Phongban" fetch="select">
+            <column name="PhongBan" length="5" not-null="true" />
+        </many-to-one>
+        <many-to-one name="quoctich" class="entities.Quoctich" fetch="select">
+            <column name="QuocTich" length="5" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tinhoc" class="entities.Tinhoc" fetch="select">
+            <column name="TinHoc" length="5" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tinhthanh" class="entities.Tinhthanh" fetch="select">
+            <column name="TinhThanh" length="5" />
+        </many-to-one>
+        <many-to-one name="tongiao" class="entities.Tongiao" fetch="select">
+            <column name="TonGiao" length="5" not-null="true" />
+        </many-to-one>
+        <property name="hoTen" type="string">
+            <column name="HoTen" length="40" />
+        </property>
+        <property name="biDanh" type="string">
+            <column name="BiDanh" length="40" />
+        </property>
+        <property name="diDong" type="string">
+            <column name="DiDong" length="11" />
+        </property>
+        <property name="dienThoaiNha" type="string">
+            <column name="DienThoaiNha" length="11" />
+        </property>
+        <property name="ngayVaoLam" type="date">
+            <column name="NgayVaoLam" length="10" not-null="true" />
+        </property>
+        <property name="email" type="string">
+            <column name="Email" length="50" />
+        </property>
+        <property name="ngaySinh" type="timestamp">
+            <column name="NgaySinh" length="19" />
+        </property>
+        <property name="noiSinh" type="string">
+            <column name="NoiSinh" length="50" />
+        </property>
+        <property name="cmnd" type="string">
+            <column name="CMND" length="10" />
+        </property>
+        <property name="ngayCap" type="timestamp">
+            <column name="NgayCap" length="19" />
+        </property>
+        <property name="noiCap" type="string">
+            <column name="NoiCap" length="50" />
+        </property>
+        <property name="queQuan" type="string">
+            <column name="QueQuan" length="20" />
+        </property>
+        <property name="diaChi" type="string">
+            <column name="DiaChi" length="100" />
+        </property>
+        <property name="tamTru" type="string">
+            <column name="TamTru" length="100" />
+        </property>
+        <property name="gioiTinh" type="java.lang.Boolean">
+            <column name="GioiTinh" />
+        </property>
+        <property name="honNhan" type="java.lang.Boolean">
+            <column name="HonNhan" />
+        </property>
+        <property name="mucLuongCb" type="long">
+            <column name="MucLuongCB" precision="10" scale="0" not-null="true" />
+        </property>
+        <property name="heSoLuong" type="float">
+            <column name="HeSoLuong" precision="12" scale="0" not-null="true" />
+        </property>
+        <property name="mucLuong" type="long">
+            <column name="MucLuong" precision="10" scale="0" not-null="true" />
+        </property>
+        <property name="phuCapLuong" type="long">
+            <column name="PhuCapLuong" precision="10" scale="0" not-null="true" />
+        </property>
+        <property name="soLaoDong" type="string">
+            <column name="SoLaoDong" length="5" not-null="true" />
+        </property>
+        <property name="ngayCapLd" type="date">
+            <column name="NgayCapLD" length="10" not-null="true" />
+        </property>
+        <property name="noiCapLd" type="string">
+            <column name="NoiCapLD" length="20" not-null="true" />
+        </property>
+        <property name="tknganHang" type="string">
+            <column name="TKNganHang" length="15" not-null="true" />
+        </property>
+        <property name="nganHang" type="string">
+            <column name="NganHang" length="20" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>
