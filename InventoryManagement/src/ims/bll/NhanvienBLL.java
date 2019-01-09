@@ -27,7 +27,7 @@ public class NhanvienBLL {
         return nhanvienDAL.update(nhanvien);
     }
     
-    public Boolean deleteNhanvien (Nhanvien nhanvien){
-        return nhanvienDAL.deleteOneNV(nhanvien);
+    public void deleteNhanvien (Nhanvien nhanvien){
+        nhanvienDAL.deleteOneNV(nhanvien);
     }
 }
