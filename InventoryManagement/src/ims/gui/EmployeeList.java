@@ -23,7 +23,7 @@ import javax.swing.table.DefaultTableModel;
  * @author NAT
  */
 public class EmployeeList extends javax.swing.JFrame {
-    NhanvienBLL nhanvienBLL;
+    
     List<Nhanvien> nhanvienList;
     List<Bangcap> bangcaps;
     List<Chucvu> chucvus;
@@ -50,11 +50,13 @@ public class EmployeeList extends javax.swing.JFrame {
     TinhocBLL tinhocBLL = new TinhocBLL();
     TinhthanhBLL tinhthanhBLL = new TinhthanhBLL();
     TongiaoBLL tongiaoBLL = new TongiaoBLL();
+    NhanvienBLL nhanvienBLL = new NhanvienBLL();
+    int row = 0;
+    
     /** Creates new form EmployeeList */
     public EmployeeList() {
         initComponents();
         setInfoDialog();
-        nhanvienBLL = new NhanvienBLL();
     }
     public  void setInfoDialog() {
         Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
@@ -159,6 +161,11 @@ public class EmployeeList extends javax.swing.JFrame {
                 "Mã ", "Họ Tên", "Số di động", "Ngày sinh", "Nơi sinh"
             }
         ));
+        jNhanvienTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jNhanvienTableMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jNhanvienTable);
         if (jNhanvienTable.getColumnModel().getColumnCount() > 0) {
             jNhanvienTable.getColumnModel().getColumn(1).setPreferredWidth(200);
@@ -192,7 +199,7 @@ public class EmployeeList extends javax.swing.JFrame {
         quoctichs = quoctichBLL.getListQT();
         tinhocs = tinhocBLL.getListTH();
         tongiaos = tongiaoBLL.getListTG();
-        //nhanvienList = nhanvienBLL.getListNhanvien();
+        
     }
     private void btNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNewActionPerformed
         Employee emGui= new Employee();
@@ -208,32 +215,34 @@ public class EmployeeList extends javax.swing.JFrame {
         emGui.setListTinhoc(tinhocs);
         emGui.setListTinhthanh(tinhthanhs);
         emGui.setListTongiao(tongiaos);
+        emGui.setFlag("Add");
         emGui.setEditableId(true);
         emGui.setVisible(true);
-        
-        Nhanvien newNhanvien = emGui.getNhanvien();
+        this.dispose();
+    }//GEN-LAST:event_btNewActionPerformed
+    
+    public void addNhanvien(Nhanvien newNhanvien){
         
         if(newNhanvien != null ){
             try {
                 nhanvienBLL.addNewNhanvien(newNhanvien);
                 nhanvienList.add(newNhanvien);
-                
-                DefaultTableModel model = (DefaultTableModel)jNhanvienTable.getModel();
-                int newRow = jNhanvienTable.getRowCount();
-                model.addRow(new Object[0]);
-                updateTableNhanvien(newNhanvien, newRow);
             } catch (Exception e) {
                 String message = "Không thể thêm mới nhân viên. Lỗi:\n" + e.getMessage();
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
             }
+            this.setVisible(true);
         }
-    }//GEN-LAST:event_btNewActionPerformed
-
+    }
+    
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
+        btnEdit.setEnabled(false);
+        btnDel.setEnabled(false);
         getListData();
-        loadTableData();
-        
+        nhanvienList = nhanvienBLL.getListNhanvien();
+        loadTableData(nhanvienList);
     }//GEN-LAST:event_formWindowOpened
     
     Nhanvien nhanvienToEdit;
@@ -257,23 +266,27 @@ public class EmployeeList extends javax.swing.JFrame {
             emGui.setListTinhthanh(tinhthanhs);
             emGui.setListTongiao(tongiaos);
             emGui.setNhanvien(nhanvienToEdit);
+            emGui.setFlag("Edit");
             emGui.setEditableId(false);
             emGui.setVisible(true);
         }
-        
-        Nhanvien editedNhanvien = emGui.getNhanvien();
-        
+        this.row = seletedRow;
+        this.dispose();
+    }//GEN-LAST:event_btnEditActionPerformed
+
+    public void editNhanvien(Nhanvien editedNhanvien){
+        int seletedRow = row;
         if(editedNhanvien != null){
             try {
                 nhanvienBLL.updateNhanvien(editedNhanvien);
-                updateTableNhanvien(editedNhanvien, seletedRow);
             } catch (Exception e) {
                 String message = "Không thể cập nhật nhân viên. Lỗi:\n" + e.getMessage();
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
-    }//GEN-LAST:event_btnEditActionPerformed
-
+        this.setVisible(true);
+    }
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
         // TODO add your handling code here:
         dispose();
@@ -302,9 +315,14 @@ public class EmployeeList extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnDelActionPerformed
+
+    private void jNhanvienTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jNhanvienTableMouseClicked
+        // TODO add your handling code here:
+        btnEdit.setEnabled(true);
+        btnDel.setEnabled(true);
+    }//GEN-LAST:event_jNhanvienTableMouseClicked
     
-    private void loadTableData(){
-        nhanvienList = nhanvienBLL.getListNhanvien();
+    public void loadTableData(List<Nhanvien> nhanvienList){
         int row = 0;
         DefaultTableModel model = (DefaultTableModel)jNhanvienTable.getModel();
         for(Iterator iterator = nhanvienList.iterator(); iterator.hasNext();){

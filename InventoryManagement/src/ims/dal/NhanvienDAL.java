@@ -15,10 +15,13 @@ import org.hibernate.*;
  */
 public class NhanvienDAL {
     private static SessionFactory factory = HibernateUtil.getSessionFactory();
+    private static Session session;
     public List<Nhanvien> getListNV(){
         try {
             factory.getCurrentSession().beginTransaction();
-            return factory.getCurrentSession().createCriteria(Nhanvien.class).list();
+            List<Nhanvien> list = factory.getCurrentSession().createCriteria(Nhanvien.class).list();
+            factory.getCurrentSession().getTransaction().commit();
+            return list;
         } catch (Exception e) {
             return null;
         }
@@ -26,30 +29,37 @@ public class NhanvienDAL {
     
     public Nhanvien getOneNV(String maNV){
         try {
-            factory.getCurrentSession().beginTransaction();
-            return (Nhanvien) factory.getCurrentSession().get(Nhanvien.class, maNV);
+            session = factory.openSession();
+            session.beginTransaction();
+            Nhanvien nhanvien = (Nhanvien) session.load(Nhanvien.class, maNV);
+            session.getTransaction().commit();
+            session.close();
+            return nhanvien;
         } catch (Exception e) {
             return null;
         }
     }
     
-    public boolean deleteOneNV (Nhanvien nv){
+    public void deleteOneNV (Nhanvien nv){
         try {
-            factory.getCurrentSession().beginTransaction();
-            factory.getCurrentSession().delete(nv);
-            factory.getCurrentSession().getTransaction().commit();
-            return true;
+            session = factory.openSession();
+            session.beginTransaction();
+            Nhanvien nhanvien = (Nhanvien) session.load(Nhanvien.class, nv.getMaNhanVien());
+            session.delete(nhanvien);
+            session.getTransaction().commit();
+            session.close();
         } catch (Exception e) {
             factory.getCurrentSession().getTransaction().rollback();
-            return false;
         }
     }
     
     public boolean addNew (Nhanvien nv){
         try {
-            factory.getCurrentSession().beginTransaction();
-            factory.getCurrentSession().save(nv);
-            factory.getCurrentSession().getTransaction().commit();
+            session = factory.openSession();
+            session.beginTransaction();
+            session.save(nv);
+            session.getTransaction().commit();
+            session.close();
             return true;
         } catch (Exception e) {
             factory.getCurrentSession().getTransaction().rollback();
@@ -59,9 +69,11 @@ public class NhanvienDAL {
     
     public boolean update (Nhanvien nv){
         try {
-            factory.getCurrentSession().beginTransaction();
-            factory.getCurrentSession().update(nv);
-            factory.getCurrentSession().getTransaction().commit();
+            session = factory.openSession();
+            session.beginTransaction();
+            session.update(nv);
+            session.getTransaction().commit();
+            session.close();
             return true;
         } catch (Exception e) {
             factory.getCurrentSession().getTransaction().rollback();

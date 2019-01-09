@@ -43,6 +43,10 @@ public class Employee extends javax.swing.JFrame {
     private List<Quoctich> quoctichs;
     private List<Tinhoc> tinhocs;
     private List<Tongiao> tongiaos;
+    
+    private NhanvienBLL nhanvienBLL;
+    String flag = "";
+    private EmployeeList emList;
     /**
      * Creates new form Employee
      */
@@ -51,6 +55,7 @@ public class Employee extends javax.swing.JFrame {
         stateButton(true);
         setInfoDialog();
     }
+
     public  void setInfoDialog() {
         Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
         int x = (int) ((dimension.getWidth() - getWidth()) / 2);
@@ -72,6 +77,10 @@ public class Employee extends javax.swing.JFrame {
     
     public void setEditableId(boolean value){
         txtMaso.setEditable(value);
+    }
+    
+    public void setFlag (String flag){
+        this.flag = flag;
     }
     
     public void setNhanvien(Nhanvien nhanvien){
@@ -350,8 +359,6 @@ public class Employee extends javax.swing.JFrame {
         lblTitle1.setText("Thông Tin Cá Nhân");
 
         jLabel2.setText("Mã nhân viên");
-
-        txtMaso.setEditable(false);
 
         jLabel1.setText("Họ Tên");
 
@@ -981,9 +988,17 @@ public class Employee extends javax.swing.JFrame {
     }//GEN-LAST:event_btNewActionPerformed
 
     private void btSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSaveActionPerformed
-        stateButton(false);
+        
         if(validateInput()){
-            this.dispose();
+            if(flag.equals("Add")){
+                nhanvien.setMaNhanVien(txtMaso.getText());
+                emList = new EmployeeList();
+                emList.addNhanvien(nhanvien);
+            } else if(flag.equals("Edit")){
+                emList = new EmployeeList();
+                emList.editNhanvien(nhanvien);
+            }
+            dispose();
         }
     }//GEN-LAST:event_btSaveActionPerformed
 
@@ -992,8 +1007,9 @@ public class Employee extends javax.swing.JFrame {
     }//GEN-LAST:event_btEditActionPerformed
 
     private void btCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelActionPerformed
-         stateButton(false);// TODO add your handling code here:
+         // TODO add your handling code here:
          this.dispose();
+         new EmployeeList().setVisible(true);
     }//GEN-LAST:event_btCancelActionPerformed
 
     private void cbGiadinhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbGiadinhActionPerformed
@@ -1006,7 +1022,9 @@ public class Employee extends javax.swing.JFrame {
 
     private void btCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCloseActionPerformed
         // TODO add your handling code here:
+        
         this.dispose();
+        
     }//GEN-LAST:event_btCloseActionPerformed
 
     public void loadComboBox(JComboBox comboBox, List<?> listData){
