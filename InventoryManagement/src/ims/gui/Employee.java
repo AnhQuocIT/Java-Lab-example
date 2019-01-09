@@ -22,30 +22,32 @@ import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import javax.transaction.Transactional;
 
 /**
  *
  * @author NAT
  */
-public class Employee extends javax.swing.JFrame {
+public final class Employee extends javax.swing.JFrame {
     
     private Nhanvien nhanvien;
     private List<Nhanvien> nhanvienList;
-    private List<Bangcap> bangcaps;
-    private List<Chucvu> chucvus;
-    private List<Congviec> congviecs;
-    private List<Tinhthanh> tinhthanhs;
-    private List<Loainhanvien> loainhanviens;
-    private List<Phongban> phongbans;
-    private List<Hocvan> hocvans;
-    private List<Ngoaingu> ngoaingus;
-    private List<Dantoc> dantocs;
-    private List<Quoctich> quoctichs;
-    private List<Tinhoc> tinhocs;
-    private List<Tongiao> tongiaos;
     
-    private NhanvienBLL nhanvienBLL;
-    String flag = "";
+    private final BangcapBLL bangcapBLL = new BangcapBLL();
+    private final ChucvuBLL chucvuBLL = new ChucvuBLL();
+    private final CongviecBLL congviecBLL = new CongviecBLL();
+    private final DantocBLL dantocBLL = new DantocBLL();
+    private final HocvanBLL hocvanBLL = new HocvanBLL();
+    private final LoainhanvienBLL loainhanvienBLL = new LoainhanvienBLL();
+    private final NgoainguBLL ngoainguBLL = new NgoainguBLL();
+    private final PhongbanBLL phongbanBLL = new PhongbanBLL();
+    private final QuoctichBLL quoctichBLL = new QuoctichBLL();
+    private final TinhocBLL tinhocBLL = new TinhocBLL();
+    private final TinhthanhBLL tinhthanhBLL = new TinhthanhBLL();
+    private final TongiaoBLL tongiaoBLL = new TongiaoBLL();
+    private final NhanvienBLL nhanvienBLL = new NhanvienBLL();
+    
+    private String flag = "";
     private EmployeeList emList;
     /**
      * Creates new form Employee
@@ -54,6 +56,20 @@ public class Employee extends javax.swing.JFrame {
         initComponents();
         stateButton(true);
         setInfoDialog();
+        
+        loadComboBox(cbbBangCap, bangcapBLL.getListBC());
+        loadComboBox(cbbChucvu, chucvuBLL.getListCV());
+        loadComboBox(cbbCongviec, congviecBLL.getListCV());
+        loadComboBox(cbbDantoc, dantocBLL.getListDT());
+        loadComboBox(cbbHocvan, hocvanBLL.getListHV());
+        loadComboBox(cbbLoaiNV, loainhanvienBLL.getListLNV());
+        loadComboBox(cbbNgoaiNgu, ngoainguBLL.getListNN());
+        loadComboBox(cbbPhongBan, phongbanBLL.getListPB());
+        loadComboBox(cbbQuoctich, quoctichBLL.getListQT());
+        loadComboBox(cbbTinhoc, tinhocBLL.getListTH());
+        loadComboBox(cbbTinh, tinhthanhBLL.getListTT());
+        loadComboBox(cbbTongiao, tongiaoBLL.getListTG());
+        
     }
 
     public  void setInfoDialog() {
@@ -136,65 +152,7 @@ public class Employee extends javax.swing.JFrame {
         return nhanvien;
     }
     
-    public void setListBangcap(List<Bangcap> bangcaps){
-        this.bangcaps = bangcaps;
-        loadComboBox(cbbBangCap, bangcaps);
-    }
     
-    public void setListChucvu (List<Chucvu> chucvus){
-        this.chucvus = chucvus;
-        loadComboBox(cbbChucvu, chucvus);
-    }
-    
-    public void setListCongviec (List<Congviec> congviecs){
-        this.congviecs = congviecs;
-        loadComboBox(cbbCongviec, congviecs);
-    }
-    
-    public void setListDantoc (List<Dantoc> dantocs){
-        this.dantocs = dantocs;
-        loadComboBox(cbbDantoc, dantocs);
-    }
-    
-    public void setListHocvan (List<Hocvan> hocvans){
-        this.hocvans = hocvans;
-        loadComboBox(cbbHocvan, hocvans);
-    }
-    
-    public void setListLoaiNV (List<Loainhanvien> loainhanviens){
-        this.loainhanviens = loainhanviens;
-        loadComboBox(cbbLoaiNV, loainhanviens);
-    }
-    
-    public void setListNgoaingu (List<Ngoaingu> ngoaingus){
-        this.ngoaingus = ngoaingus;
-        loadComboBox(cbbNgoaiNgu, ngoaingus);
-    }
-    
-    public void setListPhongban (List<Phongban> phongbans){
-        this.phongbans = phongbans;
-        loadComboBox(cbbPhongBan, phongbans);
-    }
-    
-    public void setListQuoctich(List<Quoctich> quoctichs){
-        this.quoctichs = quoctichs;
-        loadComboBox(cbbQuoctich, quoctichs);
-    }
-    
-    public void setListTinhoc (List<Tinhoc> tinhocs){
-        this.tinhocs = tinhocs;
-        loadComboBox(cbbTinhoc, tinhocs);
-    }
-    
-    public void setListTinhthanh(List<Tinhthanh> tinhthanhs){
-        this.tinhthanhs = tinhthanhs;
-        loadComboBox(cbbTinh, tinhthanhs);
-    }
-    
-    public void setListTongiao(List<Tongiao> tongiaos){
-        this.tongiaos = tongiaos;
-        loadComboBox(cbbTongiao, tongiaos);
-    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

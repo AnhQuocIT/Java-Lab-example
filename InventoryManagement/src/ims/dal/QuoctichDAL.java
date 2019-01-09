@@ -27,4 +27,20 @@ public class QuoctichDAL {
             return null;
         }
     }
+    
+    public Quoctich findByName(String name){
+        try {
+            Session session = factory.openSession();
+            session.beginTransaction();
+            String sql = "FROM quoctich WHERE TenQuocTich = :ten";
+            Query query = session.createQuery(sql);
+            query.setParameter("ten", name);
+            Quoctich result = (Quoctich) query.uniqueResult();
+            session.getTransaction().commit();
+            session.close();
+            return result;
+        } catch (HibernateException e) {
+            return null;
+        }
+    }
 }

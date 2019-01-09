@@ -17,4 +17,8 @@ public class QuoctichBLL {
     public List<Quoctich> getListQT(){
         return quoctichDAL.getListQT();
     }
+    
+    public Quoctich findByName(String name){
+        return quoctichDAL.findByName(name);
+    }
 }

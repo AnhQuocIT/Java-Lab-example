@@ -17,4 +17,7 @@ public class ChucvuBLL {
     public List<Chucvu> getListCV(){
         return chucvuDAL.getListCV();
     }
+    public Chucvu findByName(String name){
+        return chucvuDAL.findByName(name);
+    }
 }

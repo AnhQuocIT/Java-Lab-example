@@ -17,4 +17,8 @@ public class HocvanBLL {
     public List<Hocvan> getListHV(){
         return hocvanDAL.getListHV();
     }
+    
+    public Hocvan findByName(String name){
+        return hocvanDAL.findByName(name);
+    }
 }

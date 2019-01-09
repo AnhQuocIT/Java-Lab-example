@@ -3,10 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/1.%20Project%20on%20github/LabJavaFinal/InventoryManagement/src/ims/dal/BangcapDAL.java</file>
-            <file>file:/D:/1.%20Project%20on%20github/LabJavaFinal/InventoryManagement/src/ims/dal/NhanvienDAL.java</file>
+            <file>file:/D:/1.%20Project%20on%20github/LabJavaFinal/InventoryManagement/src/ims/bll/TinhthanhBLL.java</file>
             <file>file:/D:/1.%20Project%20on%20github/LabJavaFinal/InventoryManagement/src/ims/gui/EmployeeList.java</file>
-            <file>file:/D:/1.%20Project%20on%20github/LabJavaFinal/InventoryManagement/src/entities/Nhanvien.java</file>
+            <file>file:/D:/1.%20Project%20on%20github/LabJavaFinal/InventoryManagement/src/ims/dal/TinhthanhDAL.java</file>
             <file>file:/D:/1.%20Project%20on%20github/LabJavaFinal/InventoryManagement/src/ims/gui/Employee.java</file>
         </group>
     </open-files>

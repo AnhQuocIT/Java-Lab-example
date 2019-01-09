@@ -27,4 +27,20 @@ public class CongviecDAL {
             return null;
         }
     }
+    
+    public Congviec findByName(String name){
+        try {
+            Session session = factory.openSession();
+            session.beginTransaction();
+            String sql = "FROM congviec WHERE TenCongViec = :ten";
+            Query query = session.createQuery(sql);
+            query.setParameter("ten", name);
+            Congviec result = (Congviec) query.uniqueResult();
+            session.getTransaction().commit();
+            session.close();
+            return result;
+        } catch (HibernateException e) {
+            return null;
+        }
+    }
 }

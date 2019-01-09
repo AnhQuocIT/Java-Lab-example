@@ -26,4 +26,20 @@ public class ChucvuDAL {
             return null;
         }
     }
+    
+    public Chucvu findByName(String name){
+        try {
+            Session session = factory.openSession();
+            session.beginTransaction();
+            String sql = "FROM chucvu WHERE TenChucVu = :ten";
+            Query query = session.createQuery(sql);
+            query.setParameter("ten", name);
+            Chucvu result = (Chucvu) query.uniqueResult();
+            session.getTransaction().commit();
+            session.close();
+            return result;
+        } catch (HibernateException e) {
+            return null;
+        }
+    }
 }

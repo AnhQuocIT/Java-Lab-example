@@ -27,4 +27,20 @@ public class LoainhanvienDAL {
             return null;
         }
     }
+    
+    public Loainhanvien findByName(String name){
+        try {
+            Session session = factory.openSession();
+            session.beginTransaction();
+            String sql = "FROM loainhanvien WHERE TenLoaiNV = :ten";
+            Query query = session.createQuery(sql);
+            query.setParameter("ten", name);
+            Loainhanvien result = (Loainhanvien) query.uniqueResult();
+            session.getTransaction().commit();
+            session.close();
+            return result;
+        } catch (HibernateException e) {
+            return null;
+        }
+    }
 }

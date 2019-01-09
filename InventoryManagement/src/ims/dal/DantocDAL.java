@@ -27,4 +27,20 @@ public class DantocDAL {
             return null;
         }
     }
+    
+    public Dantoc findByName(String name){
+        try {
+            Session session = factory.openSession();
+            session.beginTransaction();
+            String sql = "FROM dantoc WHERE TenDanToc = :ten";
+            Query query = session.createQuery(sql);
+            query.setParameter("ten", name);
+            Dantoc result = (Dantoc) query.uniqueResult();
+            session.getTransaction().commit();
+            session.close();
+            return result;
+        } catch (HibernateException e) {
+            return null;
+        }
+    }
 }

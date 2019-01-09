@@ -27,4 +27,20 @@ public class NgoainguDAL {
             return null;
         }
     }
+    
+    public Ngoaingu findByName(String name){
+        try {
+            Session session = factory.openSession();
+            session.beginTransaction();
+            String sql = "FROM ngoaingu WHERE TenNgoaiNgu = :ten";
+            Query query = session.createQuery(sql);
+            query.setParameter("ten", name);
+            Ngoaingu result = (Ngoaingu) query.uniqueResult();
+            session.getTransaction().commit();
+            session.close();
+            return result;
+        } catch (HibernateException e) {
+            return null;
+        }
+    }
 }

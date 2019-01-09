@@ -17,4 +17,8 @@ public class TinhthanhBLL {
     public List<Tinhthanh> getListTT(){
         return tinhthanhDAL.getListTT();
     }
+    
+    public Tinhthanh findByName(String name){
+        return tinhthanhDAL.findByName(name);
+    }
 }

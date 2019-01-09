@@ -203,18 +203,6 @@ public class EmployeeList extends javax.swing.JFrame {
     }
     private void btNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNewActionPerformed
         Employee emGui= new Employee();
-        emGui.setListBangcap(bangcaps);
-        emGui.setListChucvu(chucvus);
-        emGui.setListCongviec(congviecs);
-        emGui.setListDantoc(dantocs);
-        emGui.setListHocvan(hocvans);
-        emGui.setListLoaiNV(loainhanviens);
-        emGui.setListNgoaingu(ngoaingus);
-        emGui.setListPhongban(phongbans);
-        emGui.setListQuoctich(quoctichs);
-        emGui.setListTinhoc(tinhocs);
-        emGui.setListTinhthanh(tinhthanhs);
-        emGui.setListTongiao(tongiaos);
         emGui.setFlag("Add");
         emGui.setEditableId(true);
         emGui.setVisible(true);
@@ -253,18 +241,6 @@ public class EmployeeList extends javax.swing.JFrame {
         Employee emGui = new Employee();
         if(seletedRow >= 0){
             nhanvienToEdit = nhanvienList.get(seletedRow);
-            emGui.setListBangcap(bangcaps);
-            emGui.setListChucvu(chucvus);
-            emGui.setListCongviec(congviecs);
-            emGui.setListDantoc(dantocs);
-            emGui.setListHocvan(hocvans);
-            emGui.setListLoaiNV(loainhanviens);
-            emGui.setListNgoaingu(ngoaingus);
-            emGui.setListPhongban(phongbans);
-            emGui.setListQuoctich(quoctichs);
-            emGui.setListTinhoc(tinhocs);
-            emGui.setListTinhthanh(tinhthanhs);
-            emGui.setListTongiao(tongiaos);
             emGui.setNhanvien(nhanvienToEdit);
             emGui.setFlag("Edit");
             emGui.setEditableId(false);

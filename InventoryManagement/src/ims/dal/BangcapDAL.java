@@ -16,16 +16,34 @@ import org.hibernate.*;
  */
 public class BangcapDAL {
     private static SessionFactory factory = HibernateUtil.getSessionFactory();
+    private static String sql = "";
     public List<Bangcap> getListBC(){
         try {
-            factory.getCurrentSession().beginTransaction();
             Session session = factory.openSession();
+            session.beginTransaction();
             Criteria criteria = session.createCriteria(Bangcap.class);
             List resultList = criteria.list();
-            factory.getCurrentSession().getTransaction().commit();
+            session.getTransaction().commit();
+            session.close();
             return resultList;
             
         } catch (Exception e) {
+            return null;
+        }
+    }
+    
+    public Bangcap findByName(String name){
+        try {
+            Session session = factory.openSession();
+            session.beginTransaction();
+            sql = "FROM bangcap WHERE TenBangCap = :ten";
+            Query query = session.createQuery(sql);
+            query.setParameter("ten", name);
+            Bangcap result = (Bangcap) query.uniqueResult();
+            session.getTransaction().commit();
+            session.close();
+            return result;
+        } catch (HibernateException e) {
             return null;
         }
     }

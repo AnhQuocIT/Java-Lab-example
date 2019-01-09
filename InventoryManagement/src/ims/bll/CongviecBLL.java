@@ -17,4 +17,8 @@ public class CongviecBLL {
     public List<Congviec> getListCV(){
         return congviecDAL.getListCV();
     }
+    
+    public Congviec findByName(String name){
+        return congviecDAL.findByName(name);
+    }
 }

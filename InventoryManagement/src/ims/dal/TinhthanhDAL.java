@@ -27,4 +27,20 @@ public class TinhthanhDAL {
             return null;
         }
     }
+    
+    public Tinhthanh findByName(String name){
+        try {
+            Session session = factory.openSession();
+            session.beginTransaction();
+            String sql = "FROM tinhthanh WHERE TenTinhThanh = :ten";
+            Query query = session.createQuery(sql);
+            query.setParameter("ten", name);
+            Tinhthanh result = (Tinhthanh) query.uniqueResult();
+            session.getTransaction().commit();
+            session.close();
+            return result;
+        } catch (HibernateException e) {
+            return null;
+        }
+    }
 }

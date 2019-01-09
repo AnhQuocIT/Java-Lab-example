@@ -26,4 +26,20 @@ public class TongiaoDAL {
             return null;
         }
     }
+    
+    public Tongiao findByName(String name){
+        try {
+            Session session = factory.openSession();
+            session.beginTransaction();
+            String sql = "FROM tongiao WHERE TenTonGiao = :ten";
+            Query query = session.createQuery(sql);
+            query.setParameter("ten", name);
+            Tongiao result = (Tongiao) query.uniqueResult();
+            session.getTransaction().commit();
+            session.close();
+            return result;
+        } catch (HibernateException e) {
+            return null;
+        }
+    }
 }

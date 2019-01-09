@@ -18,4 +18,8 @@ public class TongiaoBLL {
     public List<Tongiao> getListTG(){
         return tongiaoDAL.getListTG();
     }
+    
+    public Tongiao findByName(String name){
+        return tongiaoDAL.findByName(name);
+    }
 }

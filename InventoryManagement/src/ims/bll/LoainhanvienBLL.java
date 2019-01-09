@@ -18,4 +18,8 @@ public class LoainhanvienBLL {
     public List<Loainhanvien> getListLNV(){
         return loainhanvienDAL.getListLNV();
     }
+    
+    public Loainhanvien findByName(String name){
+        return loainhanvienDAL.findByName(name);
+    }
 }

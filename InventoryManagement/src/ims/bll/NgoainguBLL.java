@@ -17,4 +17,8 @@ public class NgoainguBLL {
     public List<Ngoaingu> getListNN(){
         return ngoainguDAL.getListNN();
     }
+    
+    public Ngoaingu findByName(String name){
+        return ngoainguDAL.findByName(name);
+    }
 }

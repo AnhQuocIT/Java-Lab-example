@@ -18,4 +18,8 @@ public class TinhocBLL {
     public List<Tinhoc> getListTH(){
         return tinhocDAL.getListTH();
     }
+    
+    public Tinhoc findByName(String name){
+        return tinhocDAL.findByName(name);
+    }
 }

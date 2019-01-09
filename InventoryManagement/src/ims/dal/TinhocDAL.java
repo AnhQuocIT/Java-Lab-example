@@ -27,4 +27,20 @@ public class TinhocDAL {
             return null;
         }
     }
+    
+    public Tinhoc findByName(String name){
+        try {
+            Session session = factory.openSession();
+            session.beginTransaction();
+            String sql = "FROM tinhoc WHERE TenTinHoc = :ten";
+            Query query = session.createQuery(sql);
+            query.setParameter("ten", name);
+            Tinhoc result = (Tinhoc) query.uniqueResult();
+            session.getTransaction().commit();
+            session.close();
+            return result;
+        } catch (HibernateException e) {
+            return null;
+        }
+    }
 }

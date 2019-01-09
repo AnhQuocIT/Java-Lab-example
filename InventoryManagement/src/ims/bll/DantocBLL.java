@@ -17,4 +17,7 @@ public class DantocBLL {
     public List<Dantoc> getListDT(){
         return dantocDAL.getListDT();
     }
+    public Dantoc findByName(String name){
+        return dantocDAL.findByName(name);
+    }
 }

@@ -19,4 +19,8 @@ public class BangcapBLL {
     public List<Bangcap> getListBC(){
         return bangcapDAL.getListBC();
     }
+    
+    public Bangcap findByName(String name){
+        return bangcapDAL.findByName(name);
+    }
 }

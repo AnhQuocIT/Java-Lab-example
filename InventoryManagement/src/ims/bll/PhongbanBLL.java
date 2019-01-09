@@ -17,4 +17,8 @@ public class PhongbanBLL {
     public List<Phongban> getListPB(){
         return phongbanDAL.getListPB();
     }
+    
+    public Phongban findByName(String name){
+        return phongbanDAL.findByName(name);
+    }
 }
