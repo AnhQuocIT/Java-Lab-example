@@ -32,7 +32,7 @@ public class PhongbanDAL {
         try {
             Session session = factory.openSession();
             session.beginTransaction();
-            String sql = "FROM phongban WHERE TenPhongBan = :ten";
+            String sql = "FROM Phongban WHERE tenPhongBan = :ten";
             Query query = session.createQuery(sql);
             query.setParameter("ten", name);
             Phongban result = (Phongban) query.uniqueResult();

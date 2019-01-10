@@ -31,7 +31,7 @@ public class TongiaoDAL {
         try {
             Session session = factory.openSession();
             session.beginTransaction();
-            String sql = "FROM tongiao WHERE TenTonGiao = :ten";
+            String sql = "FROM Tongiao WHERE tenTonGiao = :ten";
             Query query = session.createQuery(sql);
             query.setParameter("ten", name);
             Tongiao result = (Tongiao) query.uniqueResult();

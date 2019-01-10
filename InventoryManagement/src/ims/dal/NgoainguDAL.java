@@ -32,7 +32,7 @@ public class NgoainguDAL {
         try {
             Session session = factory.openSession();
             session.beginTransaction();
-            String sql = "FROM ngoaingu WHERE TenNgoaiNgu = :ten";
+            String sql = "FROM Ngoaingu WHERE tenNgoaiNgu = :ten";
             Query query = session.createQuery(sql);
             query.setParameter("ten", name);
             Ngoaingu result = (Ngoaingu) query.uniqueResult();

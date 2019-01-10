@@ -57,18 +57,18 @@ public final class Employee extends javax.swing.JFrame {
         stateButton(true);
         setInfoDialog();
         
-        loadComboBox(cbbBangCap, bangcapBLL.getListBC());
-        loadComboBox(cbbChucvu, chucvuBLL.getListCV());
-        loadComboBox(cbbCongviec, congviecBLL.getListCV());
-        loadComboBox(cbbDantoc, dantocBLL.getListDT());
-        loadComboBox(cbbHocvan, hocvanBLL.getListHV());
-        loadComboBox(cbbLoaiNV, loainhanvienBLL.getListLNV());
-        loadComboBox(cbbNgoaiNgu, ngoainguBLL.getListNN());
-        loadComboBox(cbbPhongBan, phongbanBLL.getListPB());
-        loadComboBox(cbbQuoctich, quoctichBLL.getListQT());
-        loadComboBox(cbbTinhoc, tinhocBLL.getListTH());
-        loadComboBox(cbbTinh, tinhthanhBLL.getListTT());
-        loadComboBox(cbbTongiao, tongiaoBLL.getListTG());
+        loadCmb(cbbBangCap, bangcapBLL.getListBC(), "tenBangCap", null);
+        loadCmb(cbbChucvu, chucvuBLL.getListCV(), "tenChucVu", null);
+        loadCmb(cbbCongviec, congviecBLL.getListCV(), "tenCongViec", null);
+        loadCmb(cbbDantoc, dantocBLL.getListDT(), "tenDanToc", null);
+        loadCmb(cbbHocvan, hocvanBLL.getListHV(), "tenHocVan", null);
+        loadCmb(cbbLoaiNV, loainhanvienBLL.getListLNV(), "tenLoaiNv", null);
+        loadCmb(cbbNgoaiNgu, ngoainguBLL.getListNN(), "tenNgoaiNgu", null);
+        loadCmb(cbbPhongBan, phongbanBLL.getListPB(), "tenPhongBan", null);
+        loadCmb(cbbQuoctich, quoctichBLL.getListQT(), "tenQuocTich", null);
+        loadCmb(cbbTinhoc, tinhocBLL.getListTH(), "tenTinHoc", null);
+        loadCmb(cbbTinh, tinhthanhBLL.getListTT(), "tenTinhThanh", null);
+        loadCmb(cbbTongiao, tongiaoBLL.getListTG(), "tenTonGiao", null);
         
     }
 
@@ -115,7 +115,7 @@ public final class Employee extends javax.swing.JFrame {
         txtEmail.setText(nhanvien.getEmail());
         txtNgaySinh.setText(String.valueOf(nhanvien.getNgaySinh()));
         txtNoiSinh.setText(nhanvien.getNoiSinh());
-        cbbTinh.setSelectedItem(nhanvien.getTinhthanh());
+        loadCmb(cbbTinh, tinhthanhBLL.getListTT(), "tenTinhThanh", nhanvien.getTinhthanh().getTenTinhThanh());
         txtCMND.setText(nhanvien.getCmnd());
         txtNgaycapCMND.setText(String.valueOf(nhanvien.getNgayCap()));
         txtNoiCap.setText(nhanvien.getNoiCap());
@@ -123,11 +123,11 @@ public final class Employee extends javax.swing.JFrame {
         txtDiaChi.setText(nhanvien.getDiaChi());
         txtTamtru.setText(nhanvien.getTamTru());
         
-        cbbLoaiNV.setSelectedItem(nhanvien.getLoainhanvien());
+        loadCmb(cbbLoaiNV, loainhanvienBLL.getListLNV(), "tenLoaiNv", nhanvien.getLoainhanvien().getTenLoaiNv());
         txtNgayVaoLam.setText(String.valueOf(nhanvien.getNgayVaoLam()));
-        cbbCongviec.setSelectedItem(nhanvien.getCongviec());
-        cbbPhongBan.setSelectedItem(nhanvien.getPhongban());
-        cbbChucvu.setSelectedItem(nhanvien.getChucvu());
+        loadCmb(cbbCongviec, congviecBLL.getListCV(), "tenCongViec", nhanvien.getCongviec().getTenCongViec());
+        loadCmb(cbbPhongBan, phongbanBLL.getListPB(), "tenPhongBan", nhanvien.getPhongban().getTenPhongBan());
+        loadCmb(cbbChucvu, chucvuBLL.getListCV(), "tenChucVu", nhanvien.getChucvu().getTenChucVu());
         txtLuongCB.setText(String.valueOf(nhanvien.getMucLuongCb()));
         txtHeSo.setText(String.valueOf(nhanvien.getHeSoLuong()));
         txtLuong.setText(String.valueOf(nhanvien.getMucLuong()));
@@ -137,15 +137,13 @@ public final class Employee extends javax.swing.JFrame {
         txtNoiCapLD.setText(nhanvien.getNoiCapLd());
         txtTKNH.setText(nhanvien.getTknganHang());
         txtNganHang.setText(nhanvien.getNganHang());
-        cbbHocvan.setSelectedItem(nhanvien.getHocvan());
-        cbbBangCap.setSelectedItem(nhanvien.getBangcap());
-        cbbNgoaiNgu.setSelectedItem(nhanvien.getNgoaingu());
-        
-        cbbTinhoc.setSelectedItem(nhanvien.getTinhoc());
-        
-        cbbDantoc.setSelectedItem(nhanvien.getDantoc());
-        cbbQuoctich.setSelectedItem(nhanvien.getQuoctich());
-        cbbTongiao.setSelectedItem(nhanvien.getTongiao());
+        loadCmb(cbbHocvan, hocvanBLL.getListHV(), "tenHocVan", nhanvien.getHocvan().getTenHocVan());
+        loadCmb(cbbBangCap, bangcapBLL.getListBC(), "tenBangCap", nhanvien.getBangcap().getTenBangCap());
+        loadCmb(cbbNgoaiNgu, ngoainguBLL.getListNN(), "tenNgoaiNgu", nhanvien.getNgoaingu().getTenNgoaiNgu());
+        loadCmb(cbbTinhoc, tinhocBLL.getListTH(), "tenTinHoc", nhanvien.getTinhoc().getTenTinHoc());
+        loadCmb(cbbDantoc, dantocBLL.getListDT(), "tenDanToc", nhanvien.getDantoc().getTenDanToc());
+        loadCmb(cbbQuoctich, quoctichBLL.getListQT(), "tenQuocTich", nhanvien.getQuoctich().getTenQuocTich());
+        loadCmb(cbbTongiao, tongiaoBLL.getListTG(), "tenTonGiao", nhanvien.getTongiao().getTenTonGiao());
     }
     
     public Nhanvien getNhanvien(){
@@ -785,23 +783,23 @@ public final class Employee extends javax.swing.JFrame {
         String email = txtEmail.getText();
         String ngaySinh = txtNgaySinh.getText();
         String noiSinh = txtNoiSinh.getText();
-        Tinhthanh tinhThanh = (Tinhthanh) cbbTinh.getSelectedItem();
-        String maTinhThanh = tinhThanh.getMaTinhThanh();
+        String tenTinhThanh = cbbTinh.getSelectedItem().toString();
+        Tinhthanh tinhThanh = tinhthanhBLL.findByName(tenTinhThanh);
         String CMND = txtCMND.getText();
         String ngayCapCMND = txtNgaycapCMND.getText();
         String noiCapCMND = txtNoiCap.getText();
         String queQuan = txtQuequan.getText();
         String diaChi = txtDiaChi.getText();
         String tamTru = txtTamtru.getText();
-        Loainhanvien loaiNV = (Loainhanvien) cbbLoaiNV.getSelectedItem();
-        String maLoaiNV = loaiNV.getMaLoaiNv();
+        String tenLoaiNV = cbbLoaiNV.getSelectedItem().toString();
+        Loainhanvien loaiNV = loainhanvienBLL.findByName(tenLoaiNV);
         String ngayVaoLam = txtNgayVaoLam.getText();
-        Phongban phongBan = (Phongban) cbbPhongBan.getSelectedItem();
-        String maPhongBan = phongBan.getMaPhongBan();
-        Congviec congViec = (Congviec) cbbCongviec.getSelectedItem();
-        String maCongviec = congViec.getMaCongViec();
-        Chucvu chucVu = (Chucvu) cbbChucvu.getSelectedItem();
-        String maChucVu = chucVu.getMaChucVu();
+        String tenPhongBan = cbbPhongBan.getSelectedItem().toString();
+        Phongban phongBan = phongbanBLL.findByName(tenPhongBan);
+        String tenCongviec = cbbCongviec.getSelectedItem().toString();
+        Congviec congViec = congviecBLL.findByName(tenCongviec);
+        String tenChucVu = cbbChucvu.getSelectedItem().toString();
+        Chucvu chucVu = chucvuBLL.findByName(tenChucVu);
         String luongCB = txtLuongCB.getText();
         String heSo = txtHeSo.getText();
         String luong = txtLuong.getText();
@@ -811,20 +809,20 @@ public final class Employee extends javax.swing.JFrame {
         String noiCapLD = txtNoiCapLD.getText();
         String tkNganHang = txtTKNH.getText();
         String nganHang = txtNganHang.getText();
-        Hocvan hocVan = (Hocvan) cbbHocvan.getSelectedItem();
-        String maHocVan = hocVan.getMaHocVan();
-        Bangcap bangCap = (Bangcap) cbbBangCap.getSelectedItem();
-        String maBangCap = bangCap.getMaBangCap();
-        Ngoaingu ngoaiNgu = (Ngoaingu) cbbNgoaiNgu.getSelectedItem();
-        String maNgoaiNgu = ngoaiNgu.getMaNgoaiNgu();
-        Tinhoc tinHoc = (Tinhoc) cbbTinhoc.getSelectedItem();
-        String maTinHoc = tinHoc.getMaTinHoc();
-        Dantoc danToc = (Dantoc) cbbDantoc.getSelectedItem();
-        String maDanToc = danToc.getMaDanToc();
-        Quoctich quocTich = (Quoctich) cbbQuoctich.getSelectedItem();
-        String maQuocTich = quocTich.getMaQuocTich();
-        Tongiao tonGiao = (Tongiao) cbbTongiao.getSelectedItem();
-        String maTonGiao = tonGiao.getMaTonGiao();
+        String tenHocVan = cbbHocvan.getSelectedItem().toString();
+        Hocvan hocVan = hocvanBLL.findByName(tenHocVan);
+        String tenBangCap = cbbBangCap.getSelectedItem().toString();
+        Bangcap bangCap = bangcapBLL.findByName(tenBangCap);
+        String tenNgoaiNgu = cbbNgoaiNgu.getSelectedItem().toString();
+        Ngoaingu ngoaiNgu = ngoainguBLL.findByName(tenNgoaiNgu);
+        String tenTinHoc = cbbTinhoc.getSelectedItem().toString();
+        Tinhoc tinHoc = tinhocBLL.findByName(tenTinHoc);
+        String tenDanToc = cbbDantoc.getSelectedItem().toString();
+        Dantoc danToc = dantocBLL.findByName(tenDanToc);
+        String tenQuocTich = cbbQuoctich.getSelectedItem().toString();
+        Quoctich quocTich = quoctichBLL.findByName(tenQuocTich);
+        String tenTonGiao = cbbTongiao.getSelectedItem().toString();
+        Tongiao tonGiao = tongiaoBLL.findByName(tenTonGiao);
         Date NS = null;
         Date NCCMND = null;
         Date NVL = null;
@@ -993,6 +991,32 @@ public final class Employee extends javax.swing.JFrame {
         }
         DefaultComboBoxModel model = new DefaultComboBoxModel(items);
         comboBox.setModel(model);
+    }
+    
+    public void loadCmb(JComboBox cmb, List<?> data, String col, String getData) {
+        Vector v = new Vector();
+        for (int i = 0; i < data.size(); i++) {
+            Object o = data.get(i);
+            Class<?> clazz = o.getClass();
+
+            try {
+                Field field = clazz.getDeclaredField(col);
+                field.setAccessible(true);
+                v.addElement(field.get(o));
+            } catch (NoSuchFieldException ex) {
+                Logger.getLogger(Employee.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SecurityException ex) {
+                Logger.getLogger(Employee.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IllegalArgumentException ex) {
+                Logger.getLogger(Employee.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IllegalAccessException ex) {
+                Logger.getLogger(Employee.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        cmb.setModel(new DefaultComboBoxModel<>(v));
+        if (getData != null) {
+            cmb.setSelectedItem(getData);
+        }
     }
     
     /**

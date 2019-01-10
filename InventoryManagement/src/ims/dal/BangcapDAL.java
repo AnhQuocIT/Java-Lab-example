@@ -36,7 +36,7 @@ public class BangcapDAL {
         try {
             Session session = factory.openSession();
             session.beginTransaction();
-            sql = "FROM bangcap WHERE TenBangCap = :ten";
+            sql = "FROM Bangcap a WHERE a.tenBangCap = :ten";
             Query query = session.createQuery(sql);
             query.setParameter("ten", name);
             Bangcap result = (Bangcap) query.uniqueResult();

@@ -32,7 +32,7 @@ public class TinhocDAL {
         try {
             Session session = factory.openSession();
             session.beginTransaction();
-            String sql = "FROM tinhoc WHERE TenTinHoc = :ten";
+            String sql = "FROM Tinhoc WHERE tenTinHoc = :ten";
             Query query = session.createQuery(sql);
             query.setParameter("ten", name);
             Tinhoc result = (Tinhoc) query.uniqueResult();

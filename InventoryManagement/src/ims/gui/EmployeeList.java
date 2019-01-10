@@ -214,7 +214,6 @@ public class EmployeeList extends javax.swing.JFrame {
         if(newNhanvien != null ){
             try {
                 nhanvienBLL.addNewNhanvien(newNhanvien);
-                nhanvienList.add(newNhanvien);
             } catch (Exception e) {
                 String message = "Không thể thêm mới nhân viên. Lỗi:\n" + e.getMessage();
                 e.printStackTrace();

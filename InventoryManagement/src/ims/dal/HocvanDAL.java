@@ -32,7 +32,7 @@ public class HocvanDAL {
         try {
             Session session = factory.openSession();
             session.beginTransaction();
-            String sql = "FROM hocvan WHERE TenHocVan = :ten";
+            String sql = "FROM Hocvan WHERE tenHocVan = :ten";
             Query query = session.createQuery(sql);
             query.setParameter("ten", name);
             Hocvan result = (Hocvan) query.uniqueResult();

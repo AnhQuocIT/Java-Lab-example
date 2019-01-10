@@ -32,7 +32,7 @@ public class DantocDAL {
         try {
             Session session = factory.openSession();
             session.beginTransaction();
-            String sql = "FROM dantoc WHERE TenDanToc = :ten";
+            String sql = "FROM Dantoc WHERE tenDanToc = :ten";
             Query query = session.createQuery(sql);
             query.setParameter("ten", name);
             Dantoc result = (Dantoc) query.uniqueResult();

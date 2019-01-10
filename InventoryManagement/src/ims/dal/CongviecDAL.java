@@ -32,7 +32,7 @@ public class CongviecDAL {
         try {
             Session session = factory.openSession();
             session.beginTransaction();
-            String sql = "FROM congviec WHERE TenCongViec = :ten";
+            String sql = "FROM Congviec WHERE tenCongViec = :ten";
             Query query = session.createQuery(sql);
             query.setParameter("ten", name);
             Congviec result = (Congviec) query.uniqueResult();

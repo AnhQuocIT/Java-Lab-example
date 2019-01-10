@@ -31,7 +31,7 @@ public class ChucvuDAL {
         try {
             Session session = factory.openSession();
             session.beginTransaction();
-            String sql = "FROM chucvu WHERE TenChucVu = :ten";
+            String sql = "FROM Chucvu a WHERE a.tenChucVu = :ten";
             Query query = session.createQuery(sql);
             query.setParameter("ten", name);
             Chucvu result = (Chucvu) query.uniqueResult();

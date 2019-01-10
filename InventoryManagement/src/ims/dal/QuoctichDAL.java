@@ -32,7 +32,7 @@ public class QuoctichDAL {
         try {
             Session session = factory.openSession();
             session.beginTransaction();
-            String sql = "FROM quoctich WHERE TenQuocTich = :ten";
+            String sql = "FROM Quoctich WHERE tenQuocTich = :ten";
             Query query = session.createQuery(sql);
             query.setParameter("ten", name);
             Quoctich result = (Quoctich) query.uniqueResult();
