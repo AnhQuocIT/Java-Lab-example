@@ -827,10 +827,28 @@ public final class Employee extends javax.swing.JFrame {
         Date NCCMND = null;
         Date NVL = null;
         Date NCLD = null;
-        long LCB = Long.parseLong(luongCB);
-        float HS = Float.parseFloat(heSo);
+        long LCB = 0;
+        try {
+            LCB = Long.parseLong(luongCB);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập số!");
+            txtLuongCB.requestFocus();
+            return false;
+        }
+        
+        float HS = 0;
+        try {
+            HS = Float.parseFloat(heSo);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập số!");
+            txtHeSo.requestFocus();
+            return false;
+        }
         long Lg = (long) (LCB * HS);
-        long PC = Long.parseLong(phuCap);
+        long PC = 0;
+        if(!phuCap.equals("")){
+            PC = Long.parseLong(phuCap);
+        }
         
         if (maNV.equals("")) {
             JOptionPane.showMessageDialog(this, "Nhập mã nhân viên!");
@@ -866,6 +884,7 @@ public final class Employee extends javax.swing.JFrame {
             txtHeSo.requestFocus();
             return false;
         }
+        if(!ngaySinh.equals(""))
         try {
             NS = new SimpleDateFormat("yyyy-mm-dd").parse(ngaySinh);
         } catch (ParseException ex) {
@@ -873,28 +892,33 @@ public final class Employee extends javax.swing.JFrame {
             txtNgaySinh.requestFocus();
             return false;
         }
-        try {
-            NCCMND = new SimpleDateFormat("yyyy-mm-dd").parse(ngayCapCMND);
-        } catch (ParseException ex) {
-            JOptionPane.showMessageDialog(this, "Chưa đúng định dạng ngày (yyyy-MM-dd)!");
-            txtNgaycapCMND.requestFocus();
-            return false;
+        if(!ngayCapCMND.equals("")){
+            try {
+                NCCMND = new SimpleDateFormat("yyyy-mm-dd").parse(ngayCapCMND);
+            } catch (ParseException ex) {
+                JOptionPane.showMessageDialog(this, "Chưa đúng định dạng ngày (yyyy-MM-dd)!");
+                txtNgaycapCMND.requestFocus();
+                return false;
+            }
         }
-        try {
-            NVL = new SimpleDateFormat("yyyy-mm-dd").parse(ngayVaoLam);
-        } catch (ParseException ex) {
-            JOptionPane.showMessageDialog(this, "Chưa đúng định dạng ngày (yyyy-MM-dd)!");
-            txtNgayVaoLam.requestFocus();
-            return false;
+        if(!ngayVaoLam.equals("")){
+            try {
+                NVL = new SimpleDateFormat("yyyy-mm-dd").parse(ngayVaoLam);
+            } catch (ParseException ex) {
+                JOptionPane.showMessageDialog(this, "Chưa đúng định dạng ngày (yyyy-MM-dd)!");
+                txtNgayVaoLam.requestFocus();
+                return false;
+            }
         }
-        try {
-            NCLD = new SimpleDateFormat("yyyy-mm-dd").parse(ngayCapLD);
-        } catch (ParseException ex) {
-            JOptionPane.showMessageDialog(this, "Chưa đúng định dạng ngày (yyyy-MM-dd)!");
-            txtNgayCapLD.requestFocus();
-            return false;
-        }			
-        
+        if(!ngayCapLD.equals("")){
+            try {
+                NCLD = new SimpleDateFormat("yyyy-mm-dd").parse(ngayCapLD);
+            } catch (ParseException ex) {
+                JOptionPane.showMessageDialog(this, "Chưa đúng định dạng ngày (yyyy-MM-dd)!");
+                txtNgayCapLD.requestFocus();
+                return false;
+            }			
+        }
 
         if (nhanvien == null) {		
                 nhanvien = new Nhanvien();
